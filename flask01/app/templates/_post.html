@@ -1,0 +1,13 @@
+    <table>
+        <tr>
+            <td>
+                <a href="{{ url_for('main.user_page', username=post.author.username) }}">
+                    {{ post.author.username }}
+                </a>
+                said {{ moment(post.timestamp).fromNow() }}:
+                <br>{{ post.body }}
+                <br>
+                <br>
+            </td>
+        </tr>
+    </table>

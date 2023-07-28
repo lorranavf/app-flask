@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <br>
+    <h3>Hi, {{ current_user.firstname }}, what are you thinking?</h3>
+    <br>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=80, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <br>
+    <h3>{{ current_user.firstname }}, see what your friends have posted.</h3>
+    <br>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} said {{ moment(post.timestamp).fromNow() }}: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+
+    <br>
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+    {% endif %}
+
+{% endblock %}
